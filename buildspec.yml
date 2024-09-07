@@ -10,7 +10,7 @@ phases:
       - echo 'about to call dockerd'
       - nohup /usr/local/bin/dockerd --host=unix:///var/run/docker.sock --host=tcp://127.0.0.1:2375 --storage-driver=overlay2&
       - timeout 15 sh -c "until docker info; do echo .; sleep 1; done"
-      - gpg --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys E88979FB9B30ACF2
+      - wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
       - curl -sS -o aws-iam-authenticator https://amazon-eks.s3-us-west-2.amazonaws.com/1.10.3/2018-07-26/bin/linux/amd64/aws-iam-authenticator
       # You must use a kubectl version that is within one minor version difference of your Amazon EKS cluster control plane. 
       # For example, a 1.21 kubectl client works with Kubernetes 1.20, 1.21 and 1.22 clusters.
